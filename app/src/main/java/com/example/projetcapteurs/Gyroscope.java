@@ -11,36 +11,58 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static android.util.Half.EPSILON;
+
 public class Gyroscope extends AppCompatActivity {
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
     TextView tv;
-    View view;
-    boolean accelerometreExiste;
+    TextView tv2;
+    TextView tv3;
+    TextView tv4;
+    SensorEventListener sensorListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gyroscope);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        tv = (TextView) findViewById(R.id.textView);
+        tv2 = (TextView) findViewById(R.id.textView2);
+        tv3 = (TextView) findViewById(R.id.textView3);
+        tv4 = (TextView) findViewById(R.id.textView4);
 
-        if(mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
-            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            accelerometreExiste = true;
-            SensorEventListener _SensorEventListener=   new SensorEventListener() {
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null) {
+            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+            SensorEventListener _SensorEventListener = new SensorEventListener() {
                 @Override
                 public void onSensorChanged(SensorEvent sensorEvent) {
-                    if(sensorEvent.values[0] > 2) {
-                        view.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    if(sensorEvent.values[0] >= 0) {
+                        tv.setText("N");
+                        tv2.setText("E");
+                        tv3.setText("S");
+                        tv4.setText("O");
                     }
-                    else if(sensorEvent.values[0] < - 2){
-                        view.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
+                    if(sensorEvent.values[0] >= 90) {
+                        tv.setText("E");
+                        tv2.setText("S");
+                        tv3.setText("O");
+                        tv4.setText("N");
                     }
-                    else {
-                        view.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
+                    if(sensorEvent.values[0] >= 180) {
+                        tv.setText("S");
+                        tv2.setText("O");
+                        tv3.setText("N");
+                        tv4.setText("E");
                     }
-                    tv.setText(sensorEvent.values[0] + "");
+                    if(sensorEvent.values[0] >= 270) {
+                        tv.setText("O");
+                        tv2.setText("N");
+                        tv3.setText("E");
+                        tv4.setText("S");
+                    }
+
                 }
 
                 @Override
@@ -48,19 +70,22 @@ public class Gyroscope extends AppCompatActivity {
 
                 }
             };
-            mSensorManager.registerListener(_SensorEventListener , mSensor, SensorManager.SENSOR_DELAY_UI);
-        } else {
-            tv.setText("Le capteur n'existe pas");
-            view.setBackgroundColor(11);
-            accelerometreExiste = false;
+            mSensorManager.registerListener(_SensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        else {
+            tv.setText("Le capteur n'est pas disponible");
         }
     }
 
-    /*@Override
-    public void onPause(){
+    @Override
+    protected void onPause() {
         super.onPause();
-        if(accelerometreExiste){
-            mSensorManager.unregisterListener(this);
-        }
-    }*/
+        mSensorManager.unregisterListener(sensorListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(sensorListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
 }
