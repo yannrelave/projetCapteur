@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class gyroscope extends AppCompatActivity {
+public class Gyroscope extends AppCompatActivity {
 
     private SensorManager mSensorManager;
     private Sensor mSensor;

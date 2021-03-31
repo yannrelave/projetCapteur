@@ -17,37 +17,27 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/resultLight"
+            <Button
+                android:id="@+id/btnLumiere"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="resultLight" />
-        </LinearLayout>
+                android:onClick="lightActivity"
+                android:text="Lumiere" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/resultTemp"
+            <Button
+                android:id="@+id/btnGyro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="resultTemp" />
-        </LinearLayout>
+                android:onClick="gyroscopeActivity"
+                android:text="Gyroscope" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/resultPress"
+            <Button
+                android:id="@+id/btnPress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="resultPress" />
+                android:onClick="pressureActivity"
+                android:text="Pression" />
         </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
