@@ -37,6 +37,13 @@
                 android:layout_height="wrap_content"
                 android:onClick="pressureActivity"
                 android:text="Pression" />
+
+            <Button
+                android:id="@+id/btnNiveau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="niveauActivity"
+                android:text="Niveau" />
         </LinearLayout>
 
     </LinearLayout>

@@ -19,6 +19,7 @@
         <activity android:name=".Gyroscope" />
         <activity android:name=".Luminosity" />
         <activity android:name=".Pressure" />
+        <activity android:name=".Niveau" />
     </application>
 
 </manifest>
