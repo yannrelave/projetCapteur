@@ -17,7 +17,6 @@ public class Niveau extends AppCompatActivity implements SensorEventListener {
     Sensor rotation;
     TextView resultAxeX;
     TextView resultAxeY;
-    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +24,6 @@ public class Niveau extends AppCompatActivity implements SensorEventListener {
         setContentView(R.layout.niveau);
         resultAxeX = findViewById(R.id.tvResultAxeX);
         resultAxeY = findViewById(R.id.tvResultAxeY);
-        progressBar = findViewById(R.id.progressBar);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         rotation = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
